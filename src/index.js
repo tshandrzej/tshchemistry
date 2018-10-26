@@ -1,12 +1,55 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import { createLogger } from 'redux-logger';
+import createHistory from 'history/createBrowserHistory';
+import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
+import { apiMiddleware } from 'redux-api-middleware';
+import createSagaMiddleware from 'redux-saga';
+import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
+
+import reducers from './app/app.reducer';
+import sagas from './app/sagas';
+import { AppRoutes } from './app/app.routes';
+import {
+  bodyMiddleware,
+  endpointMiddleware,
+  paramsMiddleware,
+} from './app/middlewares';
+import registerServiceWorker from './serviceWorker';
+
 import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const rootElement = document.getElementById('root');
+const history = createHistory();
+const sagaMiddleware = createSagaMiddleware();
+const middleware = [
+  thunk,
+  routerMiddleware(history),
+  bodyMiddleware,
+  paramsMiddleware,
+  endpointMiddleware,
+  apiMiddleware,
+  sagaMiddleware,
+];
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+if (process.env.NODE_ENV !== 'production') {
+  middleware.push(createLogger({ collapsed: true }));
+}
+
+const store = createStore(reducers, composeWithDevTools(applyMiddleware(...middleware)));
+
+sagaMiddleware.run(sagas);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
+      <AppRoutes />
+    </ConnectedRouter>
+  </Provider>,
+  rootElement
+);
+
+registerServiceWorker();
