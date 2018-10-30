@@ -10,6 +10,14 @@ export const fetchList = () => ({
     },
 });
 
+export const fetchElement = (elementId) => ({
+    [RSAA]: {
+        endpoint: `/elements/${elementId}`,
+        method: 'GET',
+        types: [types.FETCH_ELEMENT_REQUEST, types.FETCH_ELEMENT_SUCCESS, types.FETCH_ELEMENT_FAILURE],
+    },
+});
+
 export const addElement = (values) => {
     return {
         [RSAA]: {
@@ -39,7 +47,7 @@ export const editElement = (values, elementId) => {
                 },
                 types.EDIT_ELEMENT_FAILURE,
             ],
-            endpoint: `/branches/${elementId}`,
+            endpoint: `/elements/${elementId}`,
             method: 'PUT',
             body: values,
         },
