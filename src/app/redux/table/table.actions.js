@@ -53,3 +53,20 @@ export const editElement = (values, elementId) => {
         },
     };
 };
+
+export const deleteElement = (elementId) => {
+    return {
+        [RSAA]: {
+            types: [
+                types.DELETE_ELEMENT_REQUEST,
+                {
+                    type: types.DELETE_ELEMENT_SUCCESS,
+                    meta: {elementId},
+                },
+                types.DELETE_ELEMENT_FAILURE,
+            ],
+            endpoint: `/elements/${elementId}`,
+            method: 'DELETE',
+        },
+    };
+};

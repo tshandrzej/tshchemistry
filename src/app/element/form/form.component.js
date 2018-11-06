@@ -3,20 +3,9 @@ import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import { withStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button/Button';
-import TextField from "@material-ui/core/TextField/TextField";
+import TextField from '@material-ui/core/TextField/TextField';
 
-
-const renderTextField = ({
-                             input,
-                             label,
-                             meta: { touched, error },
-                             ...custom
-                         }) => (
-    <TextField
-        {...input}
-        {...custom}
-    />
-);
+const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => <TextField {...input} {...custom} />;
 
 class FormComponent extends Component {
   static propTypes = {
@@ -30,6 +19,9 @@ class FormComponent extends Component {
 
     return (
       <form onSubmit={this.props.handleSubmit}>
+        <div className={classes.formEelement}>
+          <Field name="name" component={renderTextField} type="text" placeholder="Name" />
+        </div>
         <div className={classes.formEelement}>
           <Field name="atomicWeight" component={renderTextField} type="text" placeholder="Atomic Weight" />
         </div>

@@ -55,6 +55,21 @@ export const tableReducer = (state = initialState, action) => {
         ...state,
         whileFetching: false,
       };
+      case types.DELETE_ELEMENT_REQUEST:
+          return {
+              ...state,
+              whileFetching: true,
+          };
+      case types.DELETE_ELEMENT_SUCCESS:
+          return {
+              ...state,
+              whileFetching: false,
+          };
+      case types.DELETE_ELEMENT_FAILURE:
+          return {
+              ...state,
+              whileFetching: false,
+          };
     default:
       return state;
   }

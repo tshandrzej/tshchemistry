@@ -53,6 +53,7 @@ class TableComponent extends React.Component {
                         Edit
                       </Button>
                     </Link>
+                      <Button variant="contained" onClick={() => this.props.deleteElement(row.id)}>Delete</Button>
                   </CustomTableCell>
                 </TableRow>
               );
