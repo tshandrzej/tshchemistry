@@ -2,3 +2,41 @@ FORMAT: 1A
 HOST: http://polls.apiblueprint.org/
 
 # tshchemistry
+
+This is an example API to keep track of known elements and their properties
+
+## Elements Collection [/elements]
+
+### List All Elements [GET]
+
++ Response 200 (application/json)
+
+    [
+        {
+            "id": 1,
+            "name": "Hydrogen",
+            "atomicWeight": 1,
+            "atomicNumber": 1,
+            "group": 1,
+            "period": 1
+            "finder": "Henry Cavendish ?"
+        },
+        {
+            "id": 2,
+            "name": "Helium",
+            "atomicWeight": 4,
+            "atomicNumber": 2,
+            "group": 1,
+            "period": 1
+            "finder": "???"
+        },
+        {
+            "id": 3,
+            "name": "Lithium",
+            "atomicWeight": 6,
+            "atomicNumber": 3,
+            "group": 1,
+            "period": 2
+            "finder": "???"
+        }
+    ]
