@@ -2,3 +2,100 @@ FORMAT: 1A
 HOST: http://polls.apiblueprint.org/
 
 # tshchemistry
+
+This is an example API to keep track of known elements in Chemistry
+
+## Elements Collection [/elements]
+
+### List All Elements [GET]
+
++ Response 200 (application/json)
+
+    [   
+        {
+            "id": 1,
+            "name": "Hydrogen",
+            "atomicWeight": 1,
+            "atomicNumber": 1,
+            "group": 1,
+            "period": 1,
+            "finder": "Henry Cavendish"
+        },
+        {
+            "id": 2,
+            "name": "Helium",
+            "atomicWeight": 1,
+            "atomicNumber": 2,
+            "group": 1,
+            "period": 1,
+            "finder": "???"
+        },
+        {
+            "id": 3,
+            "name": "Lithium",
+            "atomicWeight": 1,
+            "atomicNumber": 3,
+            "group": 1,
+            "period": 1,
+            "finder": "Johan August Arfwedson"
+        }
+    ]
+
+### Create a New Element [POST]
+
+If you have discovered new element, you should use this
+
++ Request (application/json)
+
+        {
+            "name": "Lithium",
+            "atomicWeight": 1,
+            "atomicNumber": 3,
+            "group": 1,
+            "period": 1,
+            "finder": "Johan August Arfwedson"
+        }
+        
++ Response 204 
+
+## Manage Elements [/elements/{id}]
+
++ Parameters
+  + id: 1
+  
+  
+### Fetch a single Element [GET]
+
+You need to get one element
+
++ Response 200 (application/json)
+
+        {
+            "name": "Lithium",
+            "atomicWeight": 1,
+            "atomicNumber": 3,
+            "group": 1,
+            "period": 1,
+            "finder": "Johan August Arfwedson"
+        }
+
+### Edit an Element [PUT]
+
+There is a mistake in the periodic table!
+
++ Request (application/json)
+
+        {
+            "name": "Lithium",
+            "atomicWeight": 1,
+            "atomicNumber": 3,
+            "group": 1,
+            "period": 1,
+            "finder": "Johan August Arfwedson"
+        }
+        
++ Response 204 
+
+### Delete an Element [DELETE]
+
++ Response 204
